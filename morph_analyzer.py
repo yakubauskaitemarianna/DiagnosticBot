@@ -15,7 +15,7 @@ dispatcher = updater.dispatcher
 
 def start(bot, update):
     bot.sendMessage(chat_id=update.message.chat_id,
-                    text="Hi. Send me any English text and I'll summarize it for you.")
+                    text="Hi. Send me any symptoms and I'll summarize it for you.")
 
 def summarize(bot, update):
     try:
@@ -26,7 +26,7 @@ def summarize(bot, update):
                         text='Hello world')
     except UnicodeEncodeError:
         bot.sendMessage(chat_id=update.message.chat_id,
-                        text="Sorry, but I can't summarise your text.")
+                        text="Sorry, but I can't define your symphoms. Maybe you are dying...")
 
 start_handler = CommandHandler('start', start)
 
