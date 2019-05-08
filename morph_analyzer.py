@@ -8,7 +8,7 @@ from pyswip import Prolog
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                      level=logging.INFO)
 
-updater = Updater(token='843122829:AAGy3knNMBy4BItZBrhAgYUqnMMjJpS0SxY',
+updater = Updater(token='kek',
                   request_kwargs={
                           'proxy_url': 'https://167.114.255.85:3128'
                           })
