@@ -27,20 +27,20 @@ def summarize(bot, update):
         results = []
         for i in range(len(text)):
             result = textProcessing.WordProcessing.extract_symptoms_base(text[i],
-                                                          BaseDate.symptoms_base)
+                                                          textProcessing.BaseDate.symptoms_base)
             if result != '':
                 results.append(result)
 
         prolog_data = []
         flag = 0
         for i in range(len(results) - 1):
-            for j in range(len(BaseDate.symptoms_base)):
-                if results[i] == BaseDate.symptoms_base[j]:
+            for j in range(len(textProcessing.BaseDate.symptoms_base)):
+                if results[i] == textProcessing.BaseDate.symptoms_base[j]:
                     prolog_data.append(results[i])
-                if str(results[i] + '_' + results[i+1]) in BaseDate.symptoms_base[j]:
-                    prolog_data.append(BaseDate.symptoms_base[j])
-                if results[-1] == BaseDate.symptoms_base[j] and flag == 0:
-                    prolog_data.append(BaseDate.symptoms_base[j])
+                if str(results[i] + '_' + results[i+1]) in textProcessing.BaseDate.symptoms_base[j]:
+                    prolog_data.append(textProcessing.BaseDate.symptoms_base[j])
+                if results[-1] == textProcessing.BaseDate.symptoms_base[j] and flag == 0:
+                    prolog_data.append(textProcessing.BaseDate.symptoms_base[j])
                     flag = 1
                     
         prolog = Prolog()
