@@ -3,6 +3,7 @@ import logging
 from telegram.ext import CommandHandler
 from telegram.ext import MessageHandler, Filters
 import textProcessing
+from pyswip import Prolog
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                      level=logging.INFO)
@@ -30,13 +31,13 @@ def summarize(bot, update):
             if result != '':
                 results.append(result)
 
-        # Паша, тебе в Prolog идет массив results, который из исходного текста
-        # содержит те слова, которые есть в нашей базе textProcessing.BaseDate.symptoms_base
+        prolog = Prolog()
+        prolog.consult('rules.pl')
+        answer = list(prolog.query(f'identify(X, {results})'))
+        diag = answer[0]['X']
 
-        # after Prolog part
-        # пока я пользователю возвращаю Hello world
         bot.sendMessage(chat_id=update.message.chat_id,
-                        text='Hello world')
+                        text=diag)
     except UnicodeEncodeError:
         bot.sendMessage(chat_id=update.message.chat_id,
                         text="Sorry, but I can't summarise your text.")
