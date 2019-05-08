@@ -4,7 +4,7 @@ class BaseDate:
     symptoms_base = ['nasal congestion', 'itchy eyes', 'sneezing', 'sore throat',
                  'cough', 'abdominal pain', 'back pain', 'chills', 'constipation',
                  'diarrhea', 'fever', 'loss of appetite', 'malaise', 'nausea',
-                 'painful rination', 'rectal pain', 'vomiting', 'joint pain',
+                 'rectal pain', 'vomiting', 'joint pain',
                  'rash', 'nausea', 'muscle pain', 'fatigue', 'hunger',
                  'urination changes', 'thirst changes', 'weight changes',
                  'fatigue', 'vomiting', 'blurred vision', 'dry mouth', 'itch',
