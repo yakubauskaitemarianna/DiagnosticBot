@@ -1,4 +1,5 @@
 from nltk.corpus import wordnet
+from pyswip import Prolog
 
 class BaseDate:
     symptoms_base1 = ['nasal congestion', 'itchy eyes', 'sneezing', 'sore throat',
@@ -38,6 +39,7 @@ class WordProcessing(BaseDate):
         self.user_string = user_string
         self.text = text
 
+    @staticmethod
     def extract_symptoms_base(user_string, symptoms_base):
 
         def check_word(word, base):
@@ -81,4 +83,31 @@ if __name__ == "__main__":
             if results[-1] == BaseDate.symptoms_base[j] and flag == 0:
                 prolog_data.append(BaseDate.symptoms_base[j])
                 flag = 1
-    print(prolog_data)
+
+text_symps = 'itchy eyes sore throat sneezing'
+text_symps = text_symps.split()
+results = []
+for i in range(len(text_symps)):
+    result = WordProcessing.extract_symptoms_base(text_symps[i],
+                                                  BaseDate.symptoms_base)
+    if result != '':
+        results.append(result)
+
+prolog_data = []
+flag = 0
+for i in range(len(results) - 1):
+    for j in range(len(BaseDate.symptoms_base)):
+        if results[i] == BaseDate.symptoms_base[j]:
+            prolog_data.append(results[i])
+        if str(results[i] + '_' + results[i+1]) in BaseDate.symptoms_base[j]:
+            prolog_data.append(BaseDate.symptoms_base[j])
+        if results[-1] == BaseDate.symptoms_base[j] and flag == 0:
+            prolog_data.append(BaseDate.symptoms_base[j])
+            flag = 1
+
+prolog = Prolog()
+prolog.consult('rules.pl')
+
+answer = list(prolog.query(f'identify(X, {prolog_data})'))
+diag = answer[0]['X']
+print(diag)
