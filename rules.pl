@@ -37,16 +37,16 @@ without(_, [0]) :- !.
 without(UL, L) :-
     not(any(UL, L)).
 
-diag(8, allergy, [31, 42, 13], [24, 41], [1], [0], 0, 0).
-diag(1, herpes, [0], [0], [0], [0], 0, 0).
-diag(2, pregnancy, [0], [0], [0], [0], 0, 0).
-diag(3, menopause, [0], [0], [0], [0], 0, 0).
-diag(4, deabetes, [0], [0], [0], [0], 0, 0).
-diag(5, lupus, [0], [0], [0], [0], 0, 0).
-diag(6, hIV, [0], [0], [0], [0], 0, 0).
-diag(7, proctate_cancer, [0], [0], [0], [0], 0, 0).
-diag(9, flu, [0], [0], [0], [0], 0, 0).
-diag(10, appendicitis, [0], [0], [0], [0], 0, 0).
+diag(1, allergy, [31, 42, 13], [24, 41], [1], [0], 0, 0).
+diag(2, appendicitis, [11, 12,  27, 38, 50], [18, 1], [0], [1, 5, 26, 14, 35], 2, 5).
+diag(3, deabetes, [22, 44, 39], [47, 51, 15], [0], [17, 32, 50, 7, 23], 3, 5).
+diag(4, flu, [11, 27, 50, 17, 14], [18, 13, 4], [0], [21, 32, 30, 46, 41], 0, 0).
+diag(5, herpes, [10, 45, 21], [23, 18, 43], [0], [0], 0, 0).
+diag(6, hIV, [43], [18], [0], [25, 30, 41, 11, 33, 29], 3, 6).
+diag(7, lupus, [25, 37], [18], [0], [4, 32, 30, 17], 2, 4).
+diag(8, menopause, [48, 49, 36], [0], [0], [3, 23, 51], 0, 0).
+diag(9, pregnancy, [17, 20, 21], [2, 46], [0], [5, 9, 19, 28, 32, 50], 3, 6).
+diag(10, proctate_cancer, [16, 34, 52, 8], [35], [0], [47, 6, 1, 42], 2, 4).
 
 cond(1, abdominal_pain).
 cond(2, absent_menstrual_periods).
@@ -82,7 +82,7 @@ cond(31, nasal_congestion).
 cond(32, nausea).
 cond(33, night_sweats).
 cond(34, painful_ejaculation).
-cond(35, painful_urination).
+cond(35, pain_urination).
 cond(36, painful_sexual_intercourse).
 cond(37, rash).
 cond(38, rectal_pain).
