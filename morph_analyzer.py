@@ -3,12 +3,11 @@ import logging
 from telegram.ext import CommandHandler
 from telegram.ext import MessageHandler, Filters
 import textProcessing
-from pyswip import Prolog
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                      level=logging.INFO)
 
-updater = Updater(token='kek',
+updater = Updater(token='',
                   request_kwargs={
                           'proxy_url': 'https://167.114.255.85:3128'
                           })
@@ -31,13 +30,26 @@ def summarize(bot, update):
             if result != '':
                 results.append(result)
 
-        prolog = Prolog()
-        prolog.consult('rules.pl')
-        answer = list(prolog.query(f'identify(X, {results})'))
-        diag = answer[0]['X']
+        prolog_data = []
+        flag = 0
+        for i in range(len(results) - 1):
+            for j in range(len(BaseDate.symptoms_base)):
+                if results[i] == BaseDate.symptoms_base[j]:
+                    prolog_data.append(results[i])
+                if str(results[i] + '_' + results[i+1]) in BaseDate.symptoms_base[j]:
+                    prolog_data.append(BaseDate.symptoms_base[j])
+                if results[-1] == BaseDate.symptoms_base[j] and flag == 0:
+                    prolog_data.append(BaseDate.symptoms_base[j])
+                    flag = 1
+        # prolog_data = твой массив
 
+        # Паша, тебе в Prolog идет массив results, который из исходного текста
+        # содержит те слова, которые есть в нашей базе textProcessing.BaseDate.symptoms_base
+
+        # after Prolog part
+        # пока я пользователю возвращаю Hello world
         bot.sendMessage(chat_id=update.message.chat_id,
-                        text=diag)
+                        text='Hello world')
     except UnicodeEncodeError:
         bot.sendMessage(chat_id=update.message.chat_id,
                         text="Sorry, but I can't summarise your text.")
