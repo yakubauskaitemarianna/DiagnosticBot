@@ -7,7 +7,7 @@ import textProcessing
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                      level=logging.INFO)
 
-updater = Updater(token='HAHAHAHAHA',
+updater = Updater(token='843122829:AAGy3knNMBy4BItZBrhAgYUqnMMjJpS0SxY',
                   request_kwargs={
                           'proxy_url': 'https://167.114.255.85:3128'
                           })
@@ -15,18 +15,31 @@ dispatcher = updater.dispatcher
 
 def start(bot, update):
     bot.sendMessage(chat_id=update.message.chat_id,
-                    text="Hi. Send me any symptoms and I'll summarize it for you.")
+                    text="Hi. Send me any English text and I'll summarize it for you.")
 
 def summarize(bot, update):
     try:
         text = update.message.text
-        text = textProcessing.morphing(text)
-        print(">>>> ",text, ">>>")
+        #print(">>>> ",text, type(text), ">>>")
+        text = text.split()
+        # before Prolog part
+        results = []
+        for i in range(len(text)):
+            result = textProcessing.WordProcessing.extract_symptoms_base(text[i],
+                                                          BaseDate.symptoms_base)
+            if result != '':
+                results.append(result)
+
+        # Паша, тебе в Prolog идет массив results, который из исходного текста
+        # содержит те слова, которые есть в нашей базе textProcessing.BaseDate.symptoms_base
+
+        # after Prolog part
+        # пока я пользователю возвращаю Hello world
         bot.sendMessage(chat_id=update.message.chat_id,
                         text='Hello world')
     except UnicodeEncodeError:
         bot.sendMessage(chat_id=update.message.chat_id,
-                        text="Sorry, but I can't define your symphoms. Maybe you are dying...")
+                        text="Sorry, but I can't summarise your text.")
 
 start_handler = CommandHandler('start', start)
 
