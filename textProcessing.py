@@ -7,7 +7,7 @@ class BaseDate:
                  'painful rination', 'rectal pain', 'vomiting', 'joint pain',
                  'rash', 'nausea', 'muscle pain', 'fatigue', 'hunger',
                  'urination changes', 'thirst changes', 'weight changes',
-                 'fatigue', 'vomiting', 'blurredvision', 'dry mouth', 'itch',
+                 'fatigue', 'vomiting', 'blurred vision', 'dry mouth', 'itch',
                  'slow-healing wounds', 'absent menstrual periods',
                  'breast pain', 'food aversion', 'frequent urination', 'headache',
                  'mood changes', 'tiredness', 'vomiting', 'urination changes',
