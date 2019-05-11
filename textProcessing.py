@@ -32,10 +32,6 @@ class BaseDate:
     'эриктильная_дисфункция' : 'erectile_dysfunction'}
 
 class WordProcessing(BaseDate):
-    def __init__(self, user_string, text):
-        self.user_string = user_string
-        self.text = text
-
     @staticmethod
     def extract_symptoms_base(user_string, symptoms_base):
 
@@ -69,8 +65,6 @@ class WordProcessing(BaseDate):
         return results
 
 if __name__ == "__main__":
-    text1 = 'i have a terrible rhinal swelling sore throat and itchy eyes'
-    text1 = 'acne'
     text = 'Я чихаю, у меня сухость в глазах и больное горло.'
 
     text = "".join(l for l in text if l not in string.punctuation)
@@ -91,25 +85,22 @@ if __name__ == "__main__":
             if result:
                 results.append(result)
 
-    prolog_data = []
-    flag = 0
-
     _maxcount = max([word.count('_') for word in symptoms_base_ru]) + 1
 
     results = WordProcessing.symptoms_combination(_maxcount, results)
 
+    rus_data = []
+
     for i in range(len(results)):
         for j in range(len(symptoms_base_ru)):
             if results[i] == symptoms_base_ru[j]:
-                prolog_data.append(results[i])
+                rus_data.append(results[i])
 
+    prolog_data = list(dict.fromkeys(rus_data))
 
-    prolog_data = list(dict.fromkeys(prolog_data))
+    prolog_data = [BaseDate.symptoms_base_dict.get(prolog_data[i]) for i in range(len(prolog_data))]
+
     print(prolog_data)
-
-    results = [BaseDate.symptoms_base_dict.get(prolog_data[i]) for i in range(len(prolog_data))]
-
-    print(results)
 '''
     prolog = Prolog()
     prolog.consult('rules.pl')
