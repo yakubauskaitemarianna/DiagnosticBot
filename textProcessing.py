@@ -3,6 +3,7 @@ from pyswip import Prolog
 import json
 import itertools
 import pymorphy2
+import string
 
 class BaseDate:
     symptoms_base_dict = {'жажда' : 'thirst_changes', 'усталость' : 'tiredness',
@@ -70,8 +71,10 @@ class WordProcessing(BaseDate):
 if __name__ == "__main__":
     text1 = 'i have a terrible rhinal swelling sore throat and itchy eyes'
     text1 = 'acne'
-    text = 'я чихаю у меня сухость в глазах и больное горло'
-    text = text.split()
+    text = 'Я чихаю, у меня сухость в глазах и больное горло.'
+
+    text = "".join(l for l in text if l not in string.punctuation)
+    text = (text.lower()).split()
 
     results = []
     symptoms_base_ru = [symptoms for symptoms, values in BaseDate.symptoms_base_dict.items()]
