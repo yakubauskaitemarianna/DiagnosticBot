@@ -1,14 +1,15 @@
-from telegram.ext import Updater
+﻿from telegram.ext import Updater
 import logging
 from telegram.ext import CommandHandler
 from telegram.ext import MessageHandler, Filters
 import textProcessing
+from textProcessing import BaseDate
 from pyswip import Prolog
 
 logging.basicConfig(format='%(asctime)s - %(name)s - %(levelname)s - %(message)s',
                      level=logging.INFO)
 
-updater = Updater(token='',
+updater = Updater(token='843122829:AAGy3knNMBy4BItZBrhAgYUqnMMjJpS0SxY',
                   request_kwargs={
                           'proxy_url': 'https://167.114.255.85:3128'
                           })
@@ -42,12 +43,12 @@ def summarize(bot, update):
                 if results[-1] == textProcessing.BaseDate.symptoms_base[j] and flag == 0:
                     prolog_data.append(textProcessing.BaseDate.symptoms_base[j])
                     flag = 1
-                    
+        print(prolog_data)
         prolog = Prolog()
         prolog.consult('rules.pl')
         answer = list(prolog.query(f'identify(X, {results})'))
         diag = answer[0]['X']
-        
+
         bot.sendMessage(chat_id=update.message.chat_id,
                          text=diag)
     except UnicodeEncodeError:
