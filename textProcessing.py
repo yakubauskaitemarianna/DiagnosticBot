@@ -6,23 +6,6 @@ import json
 >>>>>>> a3bd15f24b976985520707f7074a42f4b9eaa9e6
 
 class BaseDate:
-    symptoms_base1 = ['nasal congestion', 'itchy eyes', 'sneezing', 'sore throat',
-                 'cough', 'abdominal pain', 'back pain', 'chills', 'constipation',
-                 'diarrhea', 'fever', 'loss of appetite', 'malaise', 'nausea',
-                 'painful rination', 'rectal pain', 'vomiting', 'joint pain',
-                 'rash', 'nausea', 'muscle pain', 'fatigue', 'hunger',
-                 'urination changes', 'thirst changes', 'weight changes',
-                 'fatigue', 'vomiting', 'blurredvision', 'dry mouth', 'itch',
-                 'slow-healing wounds', 'absent menstrual periods',
-                 'breast pain', 'food aversion', 'frequent urination', 'headache',
-                 'mood changes', 'tiredness', 'vomiting', 'urination changes',
-                 'pain urination', 'erectile dysfunction', 'painful ejaculation',
-                 'blood in urine', 'weight loss', 'bone pain', 'swelling', 'malaise',
-                 'headache', 'muscle pain', 'tiredness', 'fatigue', 'appetite loss',
-                 'diarrhea', 'itch', 'burning', 'tingling', 'swollen lymph nodes',
-                 'joint pain', 'night sweats', 'mouth ulcers', 'vaginal dryness',
-                 'painful sexual intercourse', 'vaginal irritation', 'acne']
-
     symptoms_base_ru = ['жажда', 'усталость', 'чихание', 'кровь_в_моче',
     'сухость_в_глазах', 'раздражение_влагалища', 'изменения_мочеиспускания',
     'боль_в_животе', 'медленно_заживающие_раны', 'боль_при_эакуляции', 'потеря_аппетита',
@@ -37,36 +20,30 @@ class BaseDate:
     'болезненный_половой_акт', 'отстутствие_менструации', 'голод', 'изменение_веса',
     'изменение_настроения']
 
-    symptoms_base = ['thirst_changes', 'tiredness', 'sneezing', 'blood_in_urine',
-    'itchy_eyes', 'vaginal_irritation', 'urination_changes', 'abdominal_pain',
-    'slow-healing_wounds', 'painful_ejaculation', 'loss_of_appetite', 'rash',
-    'frequent_urination', 'swelling', 'fatigue', 'appetite_loss', 'mouth_ulcers',
-    'pain_urination', 'cough', 'headache', 'acne', 'swollen_lymph_nodes',
-    'night_sweats', 'bone_pain', 'burning',
-    'constipation', 'sore_throat', 'erectile_dysfunction', 'dry_mouth', 'vaginal_dryness',
-    'rectal_pain',
-    'breast_pain', 'nausea', 'muscle_pain', 'back_pain', 'fever', 'joint_pain',
-    'vomiting', 'chills', 'blurred_vision', 'tingling', 'food_aversion',
-    'weight_loss', 'nasal_congestion', 'malaise', 'diarrhea', 'itch',
-    'painful_sexual_intercourse', 'absent_menstrual_periods', 'hunger',
-    'weight_changes', 'mood_changes']
-
-
-    symptoms_dict = {'жажда' : 'thirst_changes', 'усталость' : 'tiredness', 'чихание' : 'sneezing', 'кровь_в_моче' : 'blood_in_urine',
-    'сухость_в_глазах' : 'itchy_eyes', 'раздражение_влагалища' : 'vaginal_irritation', 'изменения_мочеиспускания' : 'urination_changes',
-    'боль_в_животе' : 'abdominal_pain', 'медленно_заживающие_раны' : 'slow-healing_wounds', 'боль_при_эакуляции' : 'painful_ejaculation',
-    'потеря_аппетита' : 'loss_of_appetite',
-    'сыпь' : 'rash', 'частое_мочеиспускание' : 'frequent_urination', 'припухлость' : 'swelling', 'усталость' : 'fatigue',
-     'потеря_аппетита' : 'appetite_loss',
-    'язвы_во_рту' : 'mouth_ulcers', 'мочеиспускание_с_болью' : 'pain_urination', 'кашель' : 'cough', 'головная_боль' : 'headache', 'акне' : 'acne',
-    'увеличение_лимфатических_узлов':'swollen_lymph_nodes', 'ночной_пот':'night_sweats', 'боль_в_костях',
-    'жжение' , 'запор','больное_горло' , 'эриктильная_дисфункция', 'сухость_во_рту',
-    'вагинальная_сухость', 'ректальная_боль', 'боль_в_груди', 'тошнота',
-    'мышечная_боль', 'боль_в_спине', 'лихорадка', 'боль_в_суставах',
-    'рвота', 'озноб', 'размытое_зрение', 'покалывание', 'неприятие_пищи',
-    'потеря_веса', 'заложенность_носа', 'недомогание', 'диарея', 'зуд',
-    'болезненный_половой_акт', 'отстутствие_менструации', 'голод', 'изменение_веса',
-    'изменение_настроения'}
+    symptoms_base_dict = {'жажда' : 'thirst_changes', 'усталость' : 'tiredness',
+    'чихание' : 'sneezing', 'кровь_в_моче' : 'blood_in_urine',
+    'сухость_в_глазах' : 'itchy_eyes', 'раздражение_влагалища' : 'vaginal_irritation',
+    'изменения_мочеиспускания' : 'urination_changes', 'боль_в_животе' : 'abdominal_pain',
+     'медленно_заживающие_раны' : 'slow-healing_wounds', 'боль_при_эакуляции' : 'painful_ejaculation',
+    'потеря_аппетита' : 'loss_of_appetite', 'сыпь' : 'rash',
+    'частое_мочеиспускание' : 'frequent_urination', 'припухлость' : 'swelling',
+    'усталость' : 'fatigue', 'потеря_аппетита' : 'appetite_loss',
+    'язвы_во_рту' : 'mouth_ulcers', 'мочеиспускание_с_болью' : 'pain_urination',
+    'кашель' : 'cough', 'головная_боль' : 'headache', 'акне' : 'acne',
+    'увеличение_лимфатических_узлов' : 'swollen_lymph_nodes', 'ночной_пот' : 'night_sweats',
+    'боль_в_костях' : 'bone_pain', 'жжение' : 'burning', 'запор' : 'constipation',
+    'больное_горло' : 'sore_throat', 'эриктильная_дисфункция' : 'erectile_dysfunction',
+    'сухость_во_рту' : 'dry_mouth', 'вагинальная_сухость' : 'vaginal_dryness',
+    'ректальная_боль' : 'rectal_pain', 'боль_в_груди' : 'breast_pain',
+    'тошнота' : 'nausea', 'мышечная_боль' : 'muscle_pain',
+    'боль_в_спине' : 'back_pain', 'лихорадка' : 'fever', 'боль_в_суставах' : 'joint_pain',
+    'рвота' : 'vomiting', 'озноб' : 'chills', 'размытое_зрение' : 'blurred_vision',
+    'покалывание' : 'tingling', 'неприятие_пищи' :  'food_aversion',
+    'потеря_веса' : 'weight_loss', 'заложенность_носа' : 'nasal_congestion',
+    'недомогание' : 'malaise', 'диарея' : 'diarrhea', 'зуд' : 'itch',
+    'болезненный_половой_акт' : 'painful_sexual_intercourse',
+    'отстутствие_менструации' : 'absent_menstrual_periods', 'голод' : 'hunger',
+    'изменение_веса' : 'weight_changes', 'изменение_настроения' : 'mood_changes'}
 
 
 
