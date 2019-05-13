@@ -61,7 +61,8 @@ class WordProcessing(BaseDate):
         results = []
         for count in range(0, maxlen + 1):
             for extracted in itertools.combinations(extracted_sympt, count):
-                    results.append('_'.join(extracted))
+                for p in itertools.permutations(extracted):
+                    results.append('_'.join(p))
         return results
 
 if __name__ == "__main__":
