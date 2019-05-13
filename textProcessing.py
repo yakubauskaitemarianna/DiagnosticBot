@@ -6,7 +6,7 @@ import pymorphy2
 import string
 
 class BaseDate:
-    symptoms_base_dict = {'жажда' : 'thirst_changes', 'усталость' : 'tiredness',
+    symptoms_base_dict = {'жажда' : 'thirst_changes',
     'чихать' : 'sneezing', 'кровь_в_моче' : 'blood_in_urine', 'недомогание' : 'malaise',
     'сухость_в_глазах' : 'itchy_eyes', 'размытое_зрение' : 'blurred_vision',
     'изменения_мочеиспускания' : 'urination_changes', 'боль_в_животе' : 'abdominal_pain',
