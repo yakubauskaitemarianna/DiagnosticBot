@@ -6,7 +6,7 @@ import pymorphy2
 import string
 
 class BaseDate:
-    symptoms_base_dict = {'жажда' : 'thirst_changes', 'усталость' : 'tiredness',
+    symptoms_base_dict = {'жажда' : 'thirst_changes',
     'чихать' : 'sneezing', 'кровь_в_моче' : 'blood_in_urine', 'недомогание' : 'malaise',
     'сухость_в_глазах' : 'itchy_eyes', 'размытое_зрение' : 'blurred_vision',
     'изменения_мочеиспускания' : 'urination_changes', 'боль_в_животе' : 'abdominal_pain',
@@ -61,11 +61,15 @@ class WordProcessing(BaseDate):
         results = []
         for count in range(0, maxlen + 1):
             for extracted in itertools.combinations(extracted_sympt, count):
-                    results.append('_'.join(extracted))
+                for p in itertools.permutations(extracted):
+                    results.append('_'.join(p))
         return results
 
 if __name__ == "__main__":
-    text = 'Я чихаю, у меня сухость в глазах и больное горло.'
+    text = 'Добрый день, мне вас Марфа Петровна посоветовала.' \
+           ' У меня такая проблема, я страдаю от лихорадки, горло больное,' \
+           ' а еще сухость в глазах и, чихаю очень часто.' \
+           ' А еще в полнолуние правое ухо начинает чесаться. Доктор, что со мной?'
 
     text = "".join(l for l in text if l not in string.punctuation)
     text = (text.lower()).split()
@@ -99,17 +103,13 @@ if __name__ == "__main__":
     prolog_data = list(dict.fromkeys(rus_data))
 
     prolog_data = [BaseDate.symptoms_base_dict.get(prolog_data[i]) for i in range(len(prolog_data))]
-
-    print(prolog_data)
-'''
+    
     prolog = Prolog()
     prolog.consult('rules.pl')
-    answer = list(prolog.query(f'identify(X, {results})'))
-    #print(answer)
+    answer = list(prolog.query(f'identify(X, {prolog_data})'))
     if answer:
         diag = answer[0]['X']
         diag = diag.replace('_', ' ')
-        print('Maybe you have a', diag.encode('utf-8').decode('utf-16'))
+        print('Вероятно, у вас', diag.encode('utf-8').decode('utf-16'))
     else:
-        print("Can't identify")
-'''
+        print("Не удалось определить диагноз")
