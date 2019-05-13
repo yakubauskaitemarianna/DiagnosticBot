@@ -16,7 +16,7 @@ from_to(_, [0], _, _) :- !.
 from_to(_, [], Nmin, Nmax) :-
     Nmin =< 0,
     Nmax >= 0, !.
-from_to(UL, [Nsymp|T], Nmin, Nmax) :- write(UL), nl,
+from_to(UL, [Nsymp|T], Nmin, Nmax) :-
     cond(Nsymp, Symp),
     member(Symp, UL),
     N_min = Nmin-1,
