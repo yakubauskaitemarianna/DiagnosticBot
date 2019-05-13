@@ -109,7 +109,6 @@ if __name__ == "__main__":
     if answer:
         diag = answer[0]['X']
         diag = diag.replace('_', ' ')
-        print('Maybe you have a', diag.encode('utf-8').decode('utf-16'))
+        print('Вероятно, у вас', diag.encode('utf-8').decode('utf-16'))
     else:
-        print("Can't identify")
-'''
+        print("Не удалось определить диагноз")
