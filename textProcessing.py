@@ -102,13 +102,10 @@ if __name__ == "__main__":
     prolog_data = list(dict.fromkeys(rus_data))
 
     prolog_data = [BaseDate.symptoms_base_dict.get(prolog_data[i]) for i in range(len(prolog_data))]
-
-    print(prolog_data)
-'''
+    
     prolog = Prolog()
     prolog.consult('rules.pl')
-    answer = list(prolog.query(f'identify(X, {results})'))
-    #print(answer)
+    answer = list(prolog.query(f'identify(X, {prolog_data})'))
     if answer:
         diag = answer[0]['X']
         diag = diag.replace('_', ' ')
