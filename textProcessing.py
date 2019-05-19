@@ -1,9 +1,10 @@
+import itertools
+import string
+
+import pymorphy2
 from nltk.corpus import wordnet
 from pyswip import Prolog
-import json
-import itertools
-import pymorphy2
-import string
+
 
 class BaseDate:
     symptoms_base_dict = {'жажда' : 'thirst_changes',
@@ -65,51 +66,40 @@ class WordProcessing(BaseDate):
                     results.append('_'.join(p))
         return results
 
-if __name__ == "__main__":
-    text = 'Добрый день, мне вас Марфа Петровна посоветовала.' \
-           ' У меня такая проблема, я страдаю от лихорадки, горло больное,' \
-           ' а еще сухость в глазах и, чихаю очень часто.' \
-           ' А еще в полнолуние правое ухо начинает чесаться. Доктор, что со мной?'
 
-    text = "".join(l for l in text if l not in string.punctuation)
-    text = (text.lower()).split()
+    @staticmethod
+    def process(text):
+        text = "".join(l for l in text if l not in string.punctuation)
+        text = (text.lower()).split()
 
-    results = []
-    symptoms_base_ru = [symptoms for symptoms, values in BaseDate.symptoms_base_dict.items()]
+        results = []
+        symptoms_base_ru = [symptoms for symptoms, values in BaseDate.symptoms_base_dict.items()]
 
-    morph = pymorphy2.MorphAnalyzer()
+        morph = pymorphy2.MorphAnalyzer()
 
-    for i in range(len(text)):
-        result = WordProcessing.extract_symptoms_base(text[i], symptoms_base_ru)
-        if result != '':
-            results.append(result)
-        else:
-            normal_form = morph.parse(text[i])[0].normal_form
-            result = WordProcessing.extract_symptoms_base(normal_form, symptoms_base_ru)
-            if result:
+        for i in range(len(text)):
+            result = WordProcessing.extract_symptoms_base(text[i], symptoms_base_ru)
+            if result != '':
                 results.append(result)
+            else:
+                normal_form = morph.parse(text[i])[0].normal_form
+                result = WordProcessing.extract_symptoms_base(normal_form, symptoms_base_ru)
+                if result:
+                    results.append(result)
 
-    _maxcount = max([word.count('_') for word in symptoms_base_ru]) + 1
+        _maxcount = max([word.count('_') for word in symptoms_base_ru]) + 1
 
-    results = WordProcessing.symptoms_combination(_maxcount, results)
+        results = WordProcessing.symptoms_combination(_maxcount, results)
 
-    rus_data = []
+        rus_data = []
 
-    for i in range(len(results)):
-        for j in range(len(symptoms_base_ru)):
-            if results[i] == symptoms_base_ru[j]:
-                rus_data.append(results[i])
+        for i in range(len(results)):
+            for j in range(len(symptoms_base_ru)):
+                if results[i] == symptoms_base_ru[j]:
+                    rus_data.append(results[i])
 
-    prolog_data = list(dict.fromkeys(rus_data))
+        prolog_data = list(dict.fromkeys(rus_data))
+        prolog_data = [BaseDate.symptoms_base_dict.get(prolog_data[i]) for i in range(len(prolog_data))]
 
-    prolog_data = [BaseDate.symptoms_base_dict.get(prolog_data[i]) for i in range(len(prolog_data))]
-    
-    prolog = Prolog()
-    prolog.consult('rules.pl')
-    answer = list(prolog.query(f'identify(X, {prolog_data})'))
-    if answer:
-        diag = answer[0]['X']
-        diag = diag.replace('_', ' ')
-        print('Вероятно, у вас', diag.encode('utf-8').decode('utf-16'))
-    else:
-        print("Не удалось определить диагноз")
+        return prolog_data
+
