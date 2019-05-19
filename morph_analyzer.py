@@ -34,7 +34,7 @@ def summarize(bot, update):
 
 def main():
     request = Request(con_pool_size=8, proxy_url='http://144.217.160.173:3128')
-    bot = DiagBot(token='843122829:AAGy3knNMBy4BItZBrhAgYUqnMMjJpS0SxY',
+    bot = DiagBot(token='',
                   request=request)
     updater = Updater(bot=bot)
     dispatcher = updater.dispatcher
